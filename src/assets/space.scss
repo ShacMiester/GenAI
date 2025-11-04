@@ -1,0 +1,102 @@
+@mixin generate-gap($multiplier) {
+  $gap-value: $multiplier * 2px;
+  gap: $gap-value !important;
+}
+
+@for $i from 1 through 30 {
+  .gap-#{$i} {
+    @include generate-gap($i);
+  }
+}
+
+@mixin padding($value) {
+  .p-#{$value} {
+    padding: #{$value * 2}px;
+  }
+}
+
+@mixin margin-bottom($value) {
+  .mb-#{$value} {
+    margin-bottom: #{$value * 2}px;
+  }
+}
+
+@mixin margin-top($value) {
+  .mt-#{$value} {
+    margin-top: #{$value * 2}px;
+  }
+}
+
+@mixin margin-start($value) {
+  .ms-#{$value} {
+    margin-inline-start: #{$value * 2}px;
+  }
+}
+
+@mixin margin($value) {
+  .m-#{$value} {
+    margin: #{$value * 2}px;
+  }
+}
+
+@mixin padding-top($value) {
+  .pt-#{$value} {
+    padding: #{$value * 2}px;
+  }
+}
+
+@mixin padding-bottom($value) {
+  .pb-#{$value} {
+    padding: #{$value * 2}px;
+  }
+}
+
+@mixin padding-vertical($value) {
+  .pv-#{$value} {
+    padding-inline: #{$value * 2}px;
+  }
+}
+
+@mixin padding-horizontal($value) {
+  .ph-#{$value} {
+    padding-inline: #{$value * 2}px;
+  }
+}
+
+@for $i from 1 through 30 {
+  @include padding-bottom($i);
+}
+
+@for $i from 1 through 30 {
+  @include padding-vertical($i);
+}
+
+@for $i from 1 through 30 {
+  @include padding-horizontal($i);
+}
+
+@for $i from 0 through 30 {
+  @include padding($i);
+}
+
+@for $i from 1 through 30 {
+  @include padding-top($i);
+}
+
+@for $i from 1 through 30 {
+  @include margin-bottom($i);
+}
+
+@for $i from 1 through 30 {
+  @include margin-top($i);
+}
+
+@for $i from 1 through 30 {
+  @include margin-start($i);
+}
+@for $i from 1 through 30 {
+  @include margin-top($i);
+}
+@for $i from 1 through 30 {
+  @include margin($i);
+}

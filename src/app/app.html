@@ -1,0 +1,4 @@
+<app-sidebar (sidebarToggle)="sidebarOpen.set($event)"></app-sidebar>
+<div class="main-content" [class.sidebar-open]="sidebarOpen()">aa
+  <router-outlet></router-outlet>
+</div>

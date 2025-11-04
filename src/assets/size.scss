@@ -1,0 +1,33 @@
+$master-size: 2px;
+
+@function size($multiplier) {
+    @return $master-size * $multiplier;
+}
+
+:root {
+    @for $i from 1 through 300 {
+        --size-#{$i}: #{size($i)};
+    }
+
+    @for $i from 1 through 300 {
+        .height-#{$i} {
+            height: #{$i}px;
+
+            &_important {
+                height: #{$i}px !important;
+            }
+        }
+    }
+
+    @for $i from 1 through 400 {
+        .width-#{$i} {
+            width: size($i);
+        }
+    }
+
+    @for $i from 1 through 400 {
+        .max-width-#{$i} {
+            max-width: size($i);
+        }
+    }
+}
