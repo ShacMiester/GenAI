@@ -1,0 +1,10 @@
+{
+  "port": 3000,
+  "watch": true,
+  "static": "./public",
+  "cors": true,
+  "no-cors": false,
+  "delay": 500,
+  "routes": "routes.json",
+  "middlewares": ["server-middleware.js"]
+}

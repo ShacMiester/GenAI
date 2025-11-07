@@ -1,0 +1,9 @@
+{
+  "/api/*": "/$1",
+  "/api/users": "/users",
+  "/api/users/:id": "/users/:id",
+  "/api/dashboard": "/dashboard",
+  "/api/dashboard/:id": "/dashboard/:id",
+  "/api/dashboard-cards": "/dashboardCards",
+  "/api/stats": "/stats"
+}

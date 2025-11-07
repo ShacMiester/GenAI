@@ -1,0 +1,118 @@
+.dashboard-card {
+  background: var(--primary-bg);
+  border-radius: 15px;
+  padding: var(--size-8);
+  border: 1px solid var(--primary-bg);
+  transition: all 0.2s ease;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    border-color: var(--primary-tint);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-5);
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .percentage-circle {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    
+    .circle-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .circle-bg {
+      fill: none;
+      stroke: var(--primary-bg);
+      stroke-width: 3;
+    }
+
+    .circle-progress {
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      transition: stroke-dasharray 0.6s ease-in-out;
+    }
+
+    .percentage-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+    align-items: center;
+    
+    genai-typography:first-child {
+      font-size: 24px !important;
+    }
+  }
+
+  .simple-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+    align-items: center;
+    
+    genai-typography:first-child {
+      font-size: 32px !important;
+    }
+  }
+
+  .percentage-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    genai-typography {
+      font-size: 18px !important;
+    }
+  }
+
+  // Color variations
+  &.card-primary {
+    .circle-progress {
+      stroke: var(--primary-tint);
+    }
+  }
+
+  &.card-success {
+    .circle-progress {
+      stroke: var(--primary-tint);
+    }
+  }
+
+  &.card-warning {
+    .circle-progress {
+      stroke: var(--primary-tint);
+    }
+  }
+
+  &.card-danger {
+    .circle-progress {
+      stroke: var(--primary-tint);
+    }
+  }
+}

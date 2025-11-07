@@ -1,4 +1,5 @@
 import { Component, signal, output } from '@angular/core';
+import { Router } from '@angular/router';
 import { SideMenuItem } from '../../interfaces/sidemenu.interface';
 import { GenAITypography } from "../../ui-elements/gen-ai-typography/gen-ai-typography";
 
@@ -13,11 +14,14 @@ export class Sidebar {
   readonly sidebarToggle = output<boolean>();
   readonly expandedItems = signal<Set<string>>(new Set(['Organization']));
 
+  constructor(private router: Router) {}
+
   readonly menuItems = signal<SideMenuItem[]>([
     {
       title: 'Dashboard',
       logo: 'images/sidebar/dashboard.svg',
-      titleColor: 'primary-tint'
+      titleColor: 'primary-tint',
+      route: '/dashboard'
     },
     {
       title: 'Report',
@@ -30,7 +34,11 @@ export class Sidebar {
       titleColor: 'btn-nav-prim-text',
       subItems: [
         {
-          title: 'Users', titleColor: 'btn-nav-prim-text', logo: 'images/sidebar/users.svg', action: {
+          title: 'Users', 
+          titleColor: 'btn-nav-prim-text', 
+          logo: 'images/sidebar/users.svg', 
+          route: '/user-management',
+          action: {
             icon: 'images/actions/plus.svg',
             callback: () => this.addNewUser()
           },
@@ -60,7 +68,24 @@ export class Sidebar {
     return this.expandedItems().has(itemTitle);
   }
 
+  navigateTo(route?: string) {
+    if (route) {
+      this.router.navigate([route]);
+    }
+  }
+
   addNewUser() {
     console.log('Add new user clicked');
+    this.router.navigate(['/user-management']);
+  }
+
+  getCurrentRouteIcon(): string {
+    const currentRoute = this.router.url;
+    if (currentRoute.includes('/dashboard')) {
+      return 'images/sidebar/dashboard.svg';
+    } else if (currentRoute.includes('/user-management')) {
+      return 'images/sidebar/users.svg';
+    }
+    return 'images/sidebar/dashboard.svg'; // default
   }
 }

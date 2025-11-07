@@ -3,14 +3,33 @@
     <div class="header" [class.w-100]="!isOpen()">
       <img [src]="isOpen() ? 'images/sidebar/client-logo.svg' : 'images/sidebar/client-logo-small.svg'" alt=""
         class="logo">
+      
+      <!-- Mobile closed state: show current route and user -->
+      @if (!isOpen()) {
+        <div class="mobile-closed-content">
+          <div class="current-route-indicator">
+            <img [src]="getCurrentRouteIcon()" alt="">
+          </div>
+          <div class="mobile-user">
+            <img src="images/sidebar/user-image.svg" alt="">
+          </div>
+        </div>
+      }
+      
+      <!-- Mobile open state: show X button -->
+      @if (isOpen()) {
+        <div class="mobile-close-x" (click)="toggle()"></div>
+      }
+      
       <div class="toggle-container" (click)="toggle()">
-        <img src="images/sidebar/burger-toggle.svg" alt="">
+        <img src="images/sidebar/burger-toggle.svg" alt="" [attr.aria-label]="isOpen() ? 'Close menu' : 'Open menu'"
+             style="width: 20px; height: 20px;">
       </div>
     </div>
     <div class="sidebar-items-container flex-1">
       @for (item of menuItems(); track item.title) {
       <div class="menu-item">
-        <div class="item-main" (click)="item.subItems ? toggleMenuItem(item.title) : null">
+        <div class="item-main" (click)="item.subItems ? toggleMenuItem(item.title) : navigateTo(item.route)">
           <div class="item-content">
             <img [src]="item.logo" alt="">
             @if (isOpen()) {
@@ -33,7 +52,7 @@
         @if (item.subItems && isOpen() && isItemExpanded(item.title)) {
         <div class="sub-items">
           @for (subItem of item.subItems; track subItem.title; let i = $index) {
-          <div class="sub-item" [style.--item-index]="i">
+          <div class="sub-item" [style.--item-index]="i" (click)="navigateTo(subItem.route)">
             <div class="flex gap-10 align-items__center">
               <img [src]="subItem.logo" alt="">
               <genai-typography [color]="subItem.titleColor" [name]="13">{{ subItem.title }}</genai-typography>
@@ -57,7 +76,7 @@
           </div>
           <div class="menu-items">
             @for (subItem of item.subItems; track subItem.title) {
-            <div class="menu-item">
+            <div class="menu-item" (click)="navigateTo(subItem.route)">
               <img [src]="subItem.logo" alt="">
               <span>{{ subItem.title }}</span>
               @if (subItem.action) {

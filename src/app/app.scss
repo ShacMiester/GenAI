@@ -1,9 +1,19 @@
-.main-content {
-  margin-left: 0;
-  transition: margin-left 0.3s ease;
-  min-height: 100vh;
+:host {
+  display: flex;
 }
 
-.main-content.sidebar-open {
-  margin-left: 250px;
+.main-content {
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  :host {
+    flex-direction: column;
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+  }
 }

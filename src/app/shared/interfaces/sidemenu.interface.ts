@@ -11,4 +11,5 @@ export interface SideMenuItem {
   subItems?: SideMenuItem[];
   titleColor?: Color;
   action?: SideMenuAction;
+  route?: string;
 }
