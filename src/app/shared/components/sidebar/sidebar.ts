@@ -24,11 +24,6 @@ export class Sidebar {
       route: '/dashboard'
     },
     {
-      title: 'Report',
-      logo: 'images/sidebar/report.svg',
-      titleColor: 'btn-nav-prim-text'
-    },
-    {
       title: 'Organization',
       logo: 'images/sidebar/organization.svg',
       titleColor: 'btn-nav-prim-text',
@@ -75,7 +70,6 @@ export class Sidebar {
   }
 
   addNewUser() {
-    console.log('Add new user clicked');
     this.router.navigate(['/user-management']);
   }
 
@@ -87,5 +81,15 @@ export class Sidebar {
       return 'images/sidebar/users.svg';
     }
     return 'images/sidebar/dashboard.svg'; // default
+  }
+
+  getCurrentRouteText(): string {
+    const currentRoute = this.router.url;
+    if (currentRoute.includes('/dashboard')) {
+      return 'Dashboard';
+    } else if (currentRoute.includes('/user-management')) {
+      return 'Users';
+    }
+    return 'Dashboard';
   }
 }

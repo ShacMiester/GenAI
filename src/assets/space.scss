@@ -97,6 +97,6 @@
 @for $i from 1 through 30 {
   @include margin-top($i);
 }
-@for $i from 1 through 30 {
+@for $i from 0 through 30 {
   @include margin($i);
 }

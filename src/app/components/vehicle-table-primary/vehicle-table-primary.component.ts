@@ -22,10 +22,12 @@ interface VehicleData {
   imports: [CommonModule, ReusableTableComponent],
   template: `
     <div class="vehicle-table-container">
-      <h2>Vehicle Fleet Management - Primary View</h2>
       <app-reusable-table 
         [data]="vehicleData()" 
         [config]="tableConfig()"
+        [headerImage]="'images/clock.svg'"
+        [headerTitle]="'Vehicle Fleet Management'"
+        [headerDescription]="'12:00 PM - 08:00 PM'"
         (statusChange)="onStatusChange($event)"
       />
     </div>

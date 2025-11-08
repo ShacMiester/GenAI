@@ -1,3 +1,59 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-10);
+}
+
+.table-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 8px;
+  width: 100%;
+
+  p-iconfield {
+    width: 100%;
+  }
+
+  .global-filter {
+    width: 100%;
+  }
+}
+
+.table-header-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  
+  .header-image {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    
+    .header-title {
+      margin: 0;
+      color: var(--text-prim);
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    
+    .header-description {
+      margin: 0;
+      color: var(--text-light);
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+  }
+}
+
 .table-container {
   position: relative;
   width: 100%;
@@ -5,25 +61,6 @@
   overflow-x: auto;
   background: var(--primary-bg-deep);
   border-radius: 8px;
-  
-  .table-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background: var(--primary-bg-deep);
-    border-radius: 8px;
-    width: 100%;
-
-    p-iconfield {
-      width: 100%;
-    }
-
-    .global-filter {
-      width: 100%;
-    }
-  }
 
   .column-header {
     display: flex;
@@ -48,7 +85,6 @@
   }
 }
 
-// PrimeNG Table Customizations
 :host ::ng-deep {
   .p-datatable {
     background: var(--primary-bg-deep);
@@ -116,7 +152,6 @@
       }
     }
 
-    // Override striped table styling to ensure uniform background
     .p-datatable-striped .p-datatable-tbody > tr:nth-child(odd),
     .p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
       background: var(--primary-soft) !important;
@@ -127,7 +162,6 @@
     }
   }
 
-  // Custom scrollbar for table
   .p-datatable-scrollable {
     position: relative;
     
@@ -156,7 +190,6 @@
     }
   }
 
-  // Column reordering styles
   .p-datatable .p-datatable-thead > tr > th.p-highlight {
     background: var(--primary-color);
     color: var(--primary-color-text);
@@ -167,7 +200,6 @@
     color: var(--primary-color);
   }
 
-  // Filter input styles
   .column-filter {
     border: 1px solid var(--surface-border);
     border-radius: 4px;
@@ -180,7 +212,6 @@
     }
   }
 
-  // Global filter styles
   .global-filter {
     padding: 0.75rem;
     border: 1px solid var(--surface-border);
@@ -200,14 +231,12 @@
     }
   }
 
-  // Icon field styles
   .table-header {
     p-iconfield {
       width: 100%;
     }
   }
 
-  // Action button styles
   .action-buttons {
     .p-button {
       padding: 0.5rem;
@@ -219,7 +248,6 @@
     }
   }
 
-  // Status badge styles
   .status-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
@@ -238,7 +266,6 @@
     }
   }
 
-  // Vehicle badge styles
   .vehicle-badge {
     background: var(--primary-bg);
     color: var(--text-prim);
@@ -248,7 +275,6 @@
     font-weight: 500;
   }
 
-  // Menu styles
   .p-menu {
     min-width: 150px;
     z-index: 1100 !important;
@@ -275,7 +301,6 @@
     }
   }
 
-  // Empty message styles
   .p-datatable-emptymessage {
     text-align: center;
     padding: 2rem;
@@ -283,7 +308,6 @@
     font-style: italic;
   }
 
-  // Boolean icon styles
   .text-green-500 {
     color: #22c55e;
   }
@@ -293,7 +317,6 @@
   }
 }
 
-// Responsive design
 @media (max-width: 768px) {
   .table-container {
     .table-header {
@@ -318,7 +341,6 @@
   }
 }
 
-// Global menu styles (for appendTo="body")
 :global(.p-menu) {
   min-width: 150px !important;
   z-index: 1100 !important;
@@ -336,7 +358,6 @@
   }
 }
 
-// Responsive styles
 @media screen and (max-width: 960px) {
   .table-container {
     max-width: calc(100vw - 2rem);

@@ -8,6 +8,7 @@ import { Select } from 'primeng/select';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { TableConfiguration, SortEvent, FilterEvent } from '../../interfaces';
+import { GenAITypography } from "../../ui-elements/gen-ai-typography/gen-ai-typography";
 
 @Component({
   selector: 'app-reusable-table',
@@ -20,12 +21,11 @@ import { TableConfiguration, SortEvent, FilterEvent } from '../../interfaces';
     ButtonModule,
     Select,
     IconFieldModule,
-    InputIconModule
-  ],
+    InputIconModule,
+    GenAITypography
+],
   template: `
-    <div class="table-container">
-      <!-- Global Filter -->
-      @if (config().globalFilterFields && config().globalFilterFields!.length > 0) {
+    @if (config().globalFilterFields && config().globalFilterFields!.length > 0) {
         <div class="table-header">
           <p-iconfield>
             <p-inputicon class="pi pi-search" />
@@ -40,8 +40,22 @@ import { TableConfiguration, SortEvent, FilterEvent } from '../../interfaces';
           </p-iconfield>
         </div>
       }
-
-      <!-- Data Table -->
+      @if (headerTitle() || headerDescription() || headerImage()) {
+        <div class="table-header-info flex gap-5">
+          @if (headerImage()) {
+            <img [src]="headerImage()" alt="Header" class="header-image">
+          }
+          <div class="header-text flex-col gap-2">
+            @if (headerTitle()) {
+              <genai-typography [name]="14" class="header-title m-0">{{ headerTitle() }}</genai-typography>
+            }
+            @if (headerDescription()) {
+              <genai-typography [name]="12" class="header-description m-0">{{ headerDescription() }}</genai-typography>
+            }
+          </div>
+        </div>
+      }
+    <div class="table-container">
       <p-table 
         #dt
         [value]="data()"
@@ -95,7 +109,7 @@ import { TableConfiguration, SortEvent, FilterEvent } from '../../interfaces';
                     @switch (col.templateName) {
                       @case ('deviceIcon') {
                         <div class="device-with-icon">
-                          <img src="images/device-icon.svg" alt="Device" width="16" height="16">
+                          <img src="images/device-icon.svg" alt="Device" width="26" height="26">
                           <span>{{ getFieldValue(rowData, col.field) }}</span>
                         </div>
                       }
@@ -139,6 +153,9 @@ import { TableConfiguration, SortEvent, FilterEvent } from '../../interfaces';
 export class ReusableTableComponent {
   data = input.required<any[]>();
   config = input.required<TableConfiguration>();
+  headerTitle = input<string>('');
+  headerDescription = input<string>('');
+  headerImage = input<string>('');
 
   sortChange = output<SortEvent>();
   filterChange = output<FilterEvent>();
@@ -146,7 +163,7 @@ export class ReusableTableComponent {
 
   globalFilterValue = signal('');
   currentSort = signal<SortEvent | null>(null);
-  
+
   statusOptions = [
     { label: 'Active', value: 'Active' },
     { label: 'Inactive', value: 'Inactive' }

@@ -4,11 +4,11 @@
       <img [src]="isOpen() ? 'images/sidebar/client-logo.svg' : 'images/sidebar/client-logo-small.svg'" alt=""
         class="logo">
       
-      <!-- Mobile closed state: show current route and user -->
       @if (!isOpen()) {
         <div class="mobile-closed-content">
           <div class="current-route-indicator">
             <img [src]="getCurrentRouteIcon()" alt="">
+            <span class="route-text">{{ getCurrentRouteText() }}</span>
           </div>
           <div class="mobile-user">
             <img src="images/sidebar/user-image.svg" alt="">
@@ -16,7 +16,6 @@
         </div>
       }
       
-      <!-- Mobile open state: show X button -->
       @if (isOpen()) {
         <div class="mobile-close-x" (click)="toggle()"></div>
       }
@@ -36,7 +35,7 @@
             <genai-typography [color]="item.titleColor" [name]="14">{{ item.title }}</genai-typography>
             }
           </div>
-          @if (item.subItems) {
+          @if (item.subItems && !isOpen()) {
           <div class="overlap"></div>
           }
           <div class="item-actions">
@@ -52,7 +51,7 @@
         @if (item.subItems && isOpen() && isItemExpanded(item.title)) {
         <div class="sub-items">
           @for (subItem of item.subItems; track subItem.title; let i = $index) {
-          <div class="sub-item" [style.--item-index]="i" (click)="navigateTo(subItem.route)">
+          <div class="sub-item" (click)="navigateTo(subItem.route)">
             <div class="flex gap-10 align-items__center">
               <img [src]="subItem.logo" alt="">
               <genai-typography [color]="subItem.titleColor" [name]="13">{{ subItem.title }}</genai-typography>
@@ -67,9 +66,6 @@
         }
         @if (item.subItems && !isOpen()) {
         <div class="hover-menu">
-          <div class="menu-items-header">
-            {{item.title}}
-          </div>
           <div class="menu-header">
             <img [src]="item.logo" alt="">
             <span>{{ item.title }}</span>

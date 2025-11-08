@@ -4,9 +4,9 @@
   padding: var(--size-8);
   border: 1px solid var(--primary-bg);
   transition: all 0.2s ease;
-  width: 100%;
+  width: 136px;
   height: 100%;
-  flex: 1;
+  flex: none;
   display: flex;
   flex-direction: column;
 
@@ -114,5 +114,11 @@
     .circle-progress {
       stroke: var(--primary-tint);
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-card {
+    width: 180px;
   }
 }
